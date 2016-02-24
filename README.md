@@ -1,4 +1,4 @@
-# Opened_Partner_API__Manage_Teacher_Classes_example
+# Opened_Partner_API_Manage_Teacher_Classes_example
 This is an example application of using "Opened Partner API - Manage Teacher Classes" written in JavaScript.
 To avoid the Cross-Domain-Requests problem the simple local proxy server written in Ruby is used.
 
