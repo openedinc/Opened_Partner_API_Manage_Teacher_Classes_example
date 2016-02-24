@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <title>OpenEd Partner API&nbsp;&mdash; Manage Teacher Classes example</title>
+    <meta name="viewport" content="initial-scale=1.0, width=device-width, height=device-height, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <meta http-equiv="Expires" content="-1" />
+    <meta http-equiv="Pragma" content="no-cache" />
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+    <meta name="description" content="OpenEd Partner API - Manage Teacher Classes example" />
+    <meta name="author" content="OpenEd" />
+    <meta name="referrer" content="origin" />
+    <link rel="icon" type="image/x-icon" href="/img/education-school.ico" />
+    <link rel="shortcut icon" href="/img/education-school.ico" />
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="/partner_api.css" />
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script>
+    <script type="text/javascript" src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="/partner_api.js"></script>
+    <script type="text/javascript">
+      $(document).ready(function() {
+        window.partner_api.init({client_id: "<%= @client_id %>", signed_request: "<%= @signed_request %>"});
+      });          
+    </script>
+  </head>
+
+  <body>
+    <div class="container bs-docs-container">
+      <div class="row">
+        <div class="col-md-12">
+          <h4><a href="http://docs.opened.apiary.io/#" target="_blank">Opened Partner API</a> Example&nbsp;&mdash; Manage Teacher's Classes and Students</h4>
+          <p>To add student to class use drag-n-drop.</p>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-6">
+          <div id="classes_list" class="list-group"></div>
+        </div>
+        <div class="col-md-6">
+          <div id="students_list" class="list-group"></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="modal fade" id="create_class_modal" tabindex="-1" role="dialog" aria-labelledby="create_class_modal_label">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <h4 class="modal-title" id="create_class_modal_label">Create Class</h4>
+          </div>
+          <div class="modal-body">
+            <form id="create_group_form">
+              <div id="fg_gtitle" class="form-group">
+                <label for="group_title">* Title:</label>
+                <input type="text" class="form-control" id="group_title" placeholder="Enter the class title" required="true">
+              </div>
+              <div class="form-group">
+                <label for="grades_range">Grades Range:</label>
+                <input type="text" class="form-control" id="grades_range" placeholder="in formats: '5', '5-5', '6-8' etc">
+              </div>
+            </form>
+            <div><small>*&nbsp;&mdash; required field</small></div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+            <button type="button" id="create_group_btn" class="btn btn-primary">Create Class</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="modal fade" id="create_student_modal" tabindex="-1" role="dialog" aria-labelledby="create_student_modal_label">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <h4 class="modal-title" id="create_student_modal_label">Create Student</h4>
+          </div>
+          <div class="modal-body">
+            <form id="create_student_form">
+              <div id="fs_fname" class="form-group">
+                <label for="first_name">* First Name:</label>
+                <input type="text" class="form-control" id="first_name" placeholder="Student's first name" required="true">
+              </div>
+              <div id="fs_lname" class="form-group">
+                <label for="last_name">* Last Name:</label>
+                <input type="text" class="form-control" id="last_name" placeholder="Student's last name" required="true">
+              </div>
+              <div id="fs_uname" class="form-group">
+                <label for="username">* Username:</label>
+                <input type="text" class="form-control" id="username" placeholder="Student's username" required="true">
+              </div>
+              <div id="fs_pass" class="form-group">
+                <label for="password">* Password:</label>
+                <input type="password" class="form-control" id="password" placeholder="Student's password" required="true">
+              </div>
+            </form>
+            <div><small>*&nbsp;&mdash; required field</small></div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+            <button type="button" id="create_student_btn" class="btn btn-primary">Create Student</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="modal fade" id="info_modal" tabindex="-1" role="dialog" aria-labelledby="info_modal_label">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <h4 class="modal-title" id="info_modal_label">Info Modal</h4>
+          </div>
+          <div class="modal-body"></div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </body>
+</html>

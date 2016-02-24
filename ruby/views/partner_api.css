@@ -1,0 +1,22 @@
+.listtitle {
+	padding: 10px 0;
+}
+
+.loadingspinner {
+	height: 80px;
+	text-align: center;
+	margin-top: 20px;
+}
+
+.loader {
+	width: 20px;
+	height: 20px;
+	position: absolute;
+	top: 10px;
+	right: 50px;
+}
+
+/* Bootstrap Overrides */
+a.list-group-item:focus {
+	outline: 0;
+}

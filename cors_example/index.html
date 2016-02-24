@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <title>CORS example for OpenEd Partner API&nbsp;&mdash; Manage Teacher Classes</title>
+    <meta name="viewport" content="initial-scale=1.0, width=device-width, height=device-height, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <meta http-equiv="Expires" content="-1" />
+    <meta http-equiv="Pragma" content="no-cache" />
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+    <meta name="description" content="CORS example for OpenEd Partner API - Manage Teacher Classes" />
+    <meta name="author" content="OpenEd" />
+    <meta name="referrer" content="origin" />
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+    <script type="text/javascript">
+      $(document).ready(function() {
+        var signed_request = 'GENERATED_FROM_YOUR_REAL_APP_SECRET_AND_CLIENT_ID';
+        // ask the API for a token
+        $.ajax({
+          type: "POST",
+          url: 'https://partner.opened.com/oauth/silent_login',
+          data: signed_request,
+          success: function(data) {
+            console.info('SUCCESS: data = ', data);
+          },
+          error: function(errdata) {
+            throw new Error("ERROR on silent_login: ", errdata.error);
+          }
+        });
+      });          
+    </script>
+  </head>
+  
+  <body>
+    <center>
+    <h2>Look into the JavaScript console ;)</h2>
+    </center>
+  </body>
+</html>
